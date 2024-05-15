@@ -60,7 +60,7 @@ const Registration = () => {
   }
 
   return (
-    <div className="row d-flex justify-content-center align-items-center vh-100 bg-body-secondary">
+    <div className="row d-flex  align-items-center vh-100 bg-body-secondary">
       <form className="col-6">
         <div className="mb-3 row justify-content-end">
           <label
@@ -69,7 +69,7 @@ const Registration = () => {
           >
             Name
           </label>
-          <div className="col-sm-9">
+          <div className="col-sm-6">
             <input
               type="text"
               className="form-control"
@@ -89,7 +89,7 @@ const Registration = () => {
           >
             Email address
           </label>
-          <div className="col-sm-9">
+          <div className="col-sm-6">
             <input
               type="email"
               className="form-control"
@@ -109,7 +109,7 @@ const Registration = () => {
           >
             Password
           </label>
-          <div className="col-sm-9">
+          <div className="col-sm-6">
             <input
               type="password"
               className="form-control"
@@ -128,7 +128,7 @@ const Registration = () => {
           >
             Confirm Password
           </label>
-          <div className="col-sm-9">
+          <div className="col-sm-6">
             <input
               type="password"
               className="form-control"
@@ -142,22 +142,28 @@ const Registration = () => {
           </div>
         </div>
 
-        <button
-          type="submit"
-          className="btn btn-primary justify-content-center "
-          onClick={(event) => handleOnClick(event)}
-        >
-          Add user
-        </button>
+        <div className="row justify-content-end">
+          <div className="col-sm-9 offset-sm-3 d-flex justify-content-end">
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={(event) => handleOnClick(event)}
+            >
+              Add user
+            </button>
+          </div>
+        </div>
       </form>
 
-      <table className="table">
+      <table
+        className="table"  >
         <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
             <th scope="col">Password</th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -166,25 +172,38 @@ const Registration = () => {
             <td>{valuePrintName}</td>
             <td>{valuePrintEmail}</td>
             <td>{valuePrintPass}</td>
+            <td>
+              <button className="btn btn-primary btn-sm me-1">Edit</button>
+              <button className="btn btn-danger btn-sm">Delete</button>
+            </td>
           </tr>
           <tr>
             <th scope="row">2</th>
             <td>Newuser</td>
             <td>newuser@mail.com</td>
             <td>NewUser123</td>
+            <td>
+              <button className="btn btn-primary btn-sm me-1">Edit</button>
+              <button className="btn btn-danger btn-sm">Delete</button>
+            </td>
           </tr>
           <tr>
             <th scope="row">3</th>
             <td>Maria</td>
             <td>maria@gmail.com</td>
             <td>Maria123</td>
+            <td>
+              <button className="btn btn-primary btn-sm me-1">Edit</button>
+              <button className="btn btn-danger btn-sm">Delete</button>
+            </td>
           </tr>
         </tbody>
       </table>
 
-      {/* <div className="d-inline-block">
-        {valuePrintEmail} {valuePrintPass} {valuePrintConfirmPass}
-      </div> */}
+      <div className="d-inline-block">
+        {valuePrintName} {valuePrintEmail} {valuePrintPass}{" "}
+        {valuePrintConfirmPass}
+      </div>
     </div>
   );
 };
