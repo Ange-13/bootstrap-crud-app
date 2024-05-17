@@ -251,8 +251,7 @@ const Registration = () => {
         </div>
       </form>
 
-      <table
-        className="table table-hover"  >
+      <table className=" table table-hover table-sm">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -274,7 +273,26 @@ const Registration = () => {
               <button className="btn btn-danger btn-sm" onClick={() => {deleteOnClick(user.id)}}>Delete</button>
             </td>
           </tr>
-        ))}
+          <tr>
+            <th scope="row">2</th>
+            <td>New User</td>
+            <td>newuser@mail.com</td>
+            <td>NewUser123</td>
+            <td>
+              <button className="btn btn-primary btn-sm me-1">Edit</button>
+              <button className="btn btn-danger btn-sm">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Maria</td>
+            <td>maria@gmail.com</td>
+            <td>Maria123</td>
+            <td>
+              <button className="btn btn-primary btn-sm me-1">Edit</button>
+              <button className="btn btn-danger btn-sm">Delete</button>
+            </td>
+          </tr>
         </tbody>
       </table>
 
