@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Button } from "react-bootstrap";
 
@@ -12,15 +12,13 @@ interface User {
 const Registration = () => {
   const [valueName, setValueName] = useState("");
   const [valuePrintName, setValuePrintName] = useState("");
-  const [users, setUsers] = useState<User[]>([])
+  const [users, setUsers] = useState<User[]>([]);
   const [toggleModal, setToggleModal] = useState(false);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
-
 
   useEffect(() => {
     fetchUsers().then();
   }, []);
-
 
   function printName(eventName: ChangeEvent<HTMLInputElement>) {
     setValueName(eventName.target.value);
@@ -47,11 +45,11 @@ const Registration = () => {
       setValuePrintPass(valuePass);
       setValuePrintConfirmPass(valueConfirmPass);
 
-      fetchUsers().then(() => console.log(users))
+      fetchUsers().then(() => console.log(users));
     });
   }
 
-  function deleteOnClick(id: number){
+  function deleteOnClick(id: number) {
     fetch(`http://localhost:8081/users/${id}`, {
       method: "DELETE",
       headers: {
@@ -59,7 +57,7 @@ const Registration = () => {
         "Content-Type": "application/json",
       },
     }).then(() => {
-      fetchUsers().then()
+      fetchUsers().then();
     });
   }
 
@@ -73,17 +71,17 @@ const Registration = () => {
     }
   }
 
-  function showEdit (user: User) {
+  function showEdit(user: User) {
     setCurrentUser(user);
     setToggleModal(true);
   }
 
-  function handleCloseModal(){
+  function handleCloseModal() {
     setCurrentUser(null);
     setToggleModal(false);
   }
 
-  function handleEditUser(){
+  function handleEditUser() {
     fetch(`http://localhost:8081/users/${currentUser?.id}`, {
       method: "PATCH",
       headers: {
@@ -96,8 +94,7 @@ const Registration = () => {
         password: currentUser?.password,
       }),
     }).then(() => {
-      fetchUsers().then(()=> setToggleModal(false)
-      )
+      fetchUsers().then(() => setToggleModal(false));
     });
   }
 
@@ -112,7 +109,7 @@ const Registration = () => {
 
   function changeCurrentName(eventName: ChangeEvent<HTMLInputElement>) {
     if (currentUser) {
-      let updatedUser = {...currentUser};
+      let updatedUser = { ...currentUser };
       updatedUser.name = eventName.target.value;
       setCurrentUser(updatedUser);
       console.log("Updated user:", updatedUser);
@@ -121,7 +118,7 @@ const Registration = () => {
 
   function changeCurrentEmail(eventName: ChangeEvent<HTMLInputElement>) {
     if (currentUser) {
-      let updatedUser = {...currentUser};
+      let updatedUser = { ...currentUser };
       updatedUser.email = eventName.target.value;
       setCurrentUser(updatedUser);
       console.log("Updated user:", updatedUser);
@@ -130,7 +127,7 @@ const Registration = () => {
 
   function changeCurrentPassword(eventName: ChangeEvent<HTMLInputElement>) {
     if (currentUser) {
-      let updatedUser = {...currentUser};
+      let updatedUser = { ...currentUser };
       updatedUser.password = eventName.target.value;
       setCurrentUser(updatedUser);
       console.log("Updated user:", updatedUser);
@@ -156,7 +153,7 @@ const Registration = () => {
   }
 
   return (
-    <div className="row d-flex  align-items-center vh-100 bg-body-secondary">
+    <div className="row d-flex  align-items-center vh-100 bg-body-secondary text-center">
       <form className="col-6">
         <div className="mb-3 row justify-content-end">
           <label
@@ -251,7 +248,7 @@ const Registration = () => {
         </div>
       </form>
 
-      <table className=" table table-hover table-sm">
+      <table className="table table-hover">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -262,37 +259,30 @@ const Registration = () => {
           </tr>
         </thead>
         <tbody>
-        {users.map(user => (
-          <tr key={user.id}>
-            <th scope="row">{user.id}</th>
-            <td>{user.name}</td>
-            <td>{user.email}</td>
-            <td>{user.password}</td>
-            <td>
-              <button className="btn btn-primary btn-sm me-1" onClick={() => showEdit(user)}>Edit</button>
-              <button className="btn btn-danger btn-sm" onClick={() => {deleteOnClick(user.id)}}>Delete</button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>New User</td>
-            <td>newuser@mail.com</td>
-            <td>NewUser123</td>
-            <td>
-              <button className="btn btn-primary btn-sm me-1">Edit</button>
-              <button className="btn btn-danger btn-sm">Delete</button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Maria</td>
-            <td>maria@gmail.com</td>
-            <td>Maria123</td>
-            <td>
-              <button className="btn btn-primary btn-sm me-1">Edit</button>
-              <button className="btn btn-danger btn-sm">Delete</button>
-            </td>
-          </tr>
+          {users.map((user) => (
+            <tr key={user.id}>
+              <th scope="row">{user.id}</th>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+              <td>{user.password}</td>
+              <td>
+                <button
+                  className="btn btn-primary btn-sm me-1"
+                  onClick={() => showEdit(user)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="btn btn-danger btn-sm"
+                  onClick={() => {
+                    deleteOnClick(user.id);
+                  }}
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
 
@@ -303,33 +293,39 @@ const Registration = () => {
         <Modal.Body>
           <form>
             <div className="mb-3">
-              <label htmlFor="editName" className="form-label">Name</label>
+              <label htmlFor="editName" className="form-label">
+                Name
+              </label>
               <input
-                  type="text"
-                  className="form-control"
-                  id="editName"
-                  value={currentUser?.name}
-                  onChange={(eventName) => changeCurrentName(eventName)}
+                type="text"
+                className="form-control"
+                id="editName"
+                value={currentUser?.name}
+                onChange={(eventName) => changeCurrentName(eventName)}
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="editEmail" className="form-label">Email</label>
+              <label htmlFor="editEmail" className="form-label">
+                Email
+              </label>
               <input
-                  type="email"
-                  className="form-control"
-                  id="editEmail"
-                  value={currentUser?.email}
-                  onChange={(eventMail) => changeCurrentEmail(eventMail)}
+                type="email"
+                className="form-control"
+                id="editEmail"
+                value={currentUser?.email}
+                onChange={(eventMail) => changeCurrentEmail(eventMail)}
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="editPassword" className="form-label">Password</label>
+              <label htmlFor="editPassword" className="form-label">
+                Password
+              </label>
               <input
-                  type="password"
-                  className="form-control"
-                  id="editPassword"
-                  value={currentUser?.password}
-                  onChange={(eventPass) => changeCurrentPassword(eventPass)}
+                type="password"
+                className="form-control"
+                id="editPassword"
+                value={currentUser?.password}
+                onChange={(eventPass) => changeCurrentPassword(eventPass)}
               />
             </div>
           </form>
