@@ -152,20 +152,45 @@ const Registration = () => {
     console.log(eventConfirmPass);
   }
 
+  (function () {
+    "use strict";
+
+    var forms = document.querySelectorAll(".needs-validation");
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms).forEach(function (form) {
+      form.addEventListener(
+        "submit",
+        function (event: {
+          preventDefault: () => void;
+          stopPropagation: () => void;
+        }) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+
+          form.classList.add("was-validated");
+        },
+        false
+      );
+    });
+  })();
+
   return (
     <div className="row d-flex  align-items-center vh-100 bg-body-secondary text-center">
-      <form className="col-6">
+      <form className="col-6  was-validated">
         <div className="mb-3 row justify-content-end">
           <label
             htmlFor="inputName"
-            className="col-sm-3 col-form-label text-end"
+            className="col-sm-3 col-form-label text-end "
           >
             Name
           </label>
           <div className="col-sm-6">
             <input
               type="text"
-              className="form-control"
+              className="form-control "
               id="inputName"
               aria-describedby="nameHelp"
               required
