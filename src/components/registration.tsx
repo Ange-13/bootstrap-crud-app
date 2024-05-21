@@ -155,9 +155,10 @@ const Registration = () => {
   (function () {
     "use strict";
 
-    var forms = document.querySelectorAll(".needs-validation");
+    let forms = document.querySelectorAll(".needs-validation");
 
-    // Loop over them and prevent submission
+    // Ova ne znam kako da go upotrebam da raboti za mojata forma i dali voopsto e tocno, samo was-valdiated na formata staviv i toa samo posocuva koj input e popolnet koj ne e ama ne pazi sto stavas vo inputot
+
     Array.prototype.slice.call(forms).forEach(function (form) {
       form.addEventListener(
         "submit",
@@ -179,7 +180,7 @@ const Registration = () => {
 
   return (
     <div className="row d-flex  align-items-center vh-100 bg-body-secondary text-center">
-      <form className="col-6  was-validated">
+      <form className="col-6  was-validated  needs-validation novalidate">
         <div className="mb-3 row justify-content-end">
           <label
             htmlFor="inputName"
@@ -189,11 +190,11 @@ const Registration = () => {
           </label>
           <div className="col-sm-6">
             <input
+              required
               type="text"
               className="form-control "
               id="inputName"
               aria-describedby="nameHelp"
-              required
               value={valueName}
               onChange={(eventName) => printName(eventName)}
             />
@@ -209,14 +210,17 @@ const Registration = () => {
           </label>
           <div className="col-sm-6">
             <input
+              required
               type="email"
               className="form-control"
               id="inputEmail"
               aria-describedby="emailHelp"
-              required
               value={valueMail}
               onChange={(eventMail) => printEmail(eventMail)}
             />
+          </div>
+          <div className="invalid-feedback">
+            Invalid email address
           </div>
         </div>
 
@@ -229,10 +233,10 @@ const Registration = () => {
           </label>
           <div className="col-sm-6">
             <input
+              required
               type="password"
               className="form-control"
               id="inputPassword"
-              required
               value={valuePass}
               onChange={(eventPass) => printPass(eventPass)}
             />
@@ -248,10 +252,10 @@ const Registration = () => {
           </label>
           <div className="col-sm-6">
             <input
+              required
               type="password"
               className="form-control"
               id="inputConfirmPassword"
-              required
               value={valueConfirmPass}
               onChange={(eventConfirmPass) =>
                 printConfirmPass(eventConfirmPass)
