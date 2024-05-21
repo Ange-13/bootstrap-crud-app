@@ -1,6 +1,6 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Modal, Button } from "react-bootstrap";
+import React, { ChangeEvent, useEffect, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Modal, Button } from 'react-bootstrap';
 
 interface User {
   id: number;
@@ -8,10 +8,11 @@ interface User {
   email: string;
   password: string;
 }
+// Test comment
 
 const Registration = () => {
-  const [valueName, setValueName] = useState("");
-  const [valuePrintName, setValuePrintName] = useState("");
+  const [valueName, setValueName] = useState('');
+  const [valuePrintName, setValuePrintName] = useState('');
   const [users, setUsers] = useState<User[]>([]);
   const [toggleModal, setToggleModal] = useState(false);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -28,11 +29,11 @@ const Registration = () => {
 
   function handleOnClick(event: any) {
     event.preventDefault(event);
-    fetch("http://localhost:8081/users", {
-      method: "POST",
+    fetch('http://localhost:8081/users', {
+      method: 'POST',
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         name: valueName,
@@ -51,10 +52,10 @@ const Registration = () => {
 
   function deleteOnClick(id: number) {
     fetch(`http://localhost:8081/users/${id}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
     }).then(() => {
       fetchUsers().then();
@@ -63,11 +64,11 @@ const Registration = () => {
 
   async function fetchUsers() {
     try {
-      const response = await fetch("http://localhost:8081/users");
+      const response = await fetch('http://localhost:8081/users');
       const data = await response.json();
       setUsers(data);
     } catch (error) {
-      console.error("Error fetching users:", error);
+      console.error('Error fetching users:', error);
     }
   }
 
@@ -83,10 +84,10 @@ const Registration = () => {
 
   function handleEditUser() {
     fetch(`http://localhost:8081/users/${currentUser?.id}`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         name: currentUser?.name,
@@ -98,12 +99,12 @@ const Registration = () => {
     });
   }
 
-  const [valueMail, setValueMail] = useState("");
-  const [valuePrintEmail, setValuePrintEmail] = useState("");
+  const [valueMail, setValueMail] = useState('');
+  const [valuePrintEmail, setValuePrintEmail] = useState('');
 
   function printEmail(eventMail: ChangeEvent<HTMLInputElement>) {
     setValueMail(eventMail.target.value);
-    console.log("event1:", eventMail);
+    console.log('event1:', eventMail);
     console.log(valueMail);
   }
 
@@ -112,7 +113,7 @@ const Registration = () => {
       let updatedUser = { ...currentUser };
       updatedUser.name = eventName.target.value;
       setCurrentUser(updatedUser);
-      console.log("Updated user:", updatedUser);
+      console.log('Updated user:', updatedUser);
     }
   }
 
@@ -121,7 +122,7 @@ const Registration = () => {
       let updatedUser = { ...currentUser };
       updatedUser.email = eventName.target.value;
       setCurrentUser(updatedUser);
-      console.log("Updated user:", updatedUser);
+      console.log('Updated user:', updatedUser);
     }
   }
 
@@ -130,38 +131,38 @@ const Registration = () => {
       let updatedUser = { ...currentUser };
       updatedUser.password = eventName.target.value;
       setCurrentUser(updatedUser);
-      console.log("Updated user:", updatedUser);
+      console.log('Updated user:', updatedUser);
     }
   }
 
-  const [valuePass, setValuePass] = useState("");
-  const [valuePrintPass, setValuePrintPass] = useState("");
+  const [valuePass, setValuePass] = useState('');
+  const [valuePrintPass, setValuePrintPass] = useState('');
 
   function printPass(eventPass: ChangeEvent<HTMLInputElement>) {
     setValuePass(eventPass.target.value);
-    console.log("event1:", eventPass);
+    console.log('event1:', eventPass);
     console.log(valuePass);
   }
 
-  const [valueConfirmPass, setValueConfirmPass] = useState("");
-  const [valuePrintConfirmPass, setValuePrintConfirmPass] = useState("");
+  const [valueConfirmPass, setValueConfirmPass] = useState('');
+  const [valuePrintConfirmPass, setValuePrintConfirmPass] = useState('');
 
   function printConfirmPass(eventConfirmPass: ChangeEvent<HTMLInputElement>) {
     setValueConfirmPass(eventConfirmPass.target.value);
-    console.log("event1:", eventConfirmPass);
+    console.log('event1:', eventConfirmPass);
     console.log(eventConfirmPass);
   }
 
   (function () {
-    "use strict";
+    'use strict';
 
-    let forms = document.querySelectorAll(".needs-validation");
+    let forms = document.querySelectorAll('.needs-validation');
 
     // Ova ne znam kako da go upotrebam da raboti za mojata forma i dali voopsto e tocno, samo was-valdiated na formata staviv i toa samo posocuva koj input e popolnet koj ne e ama ne pazi sto stavas vo inputot
 
     Array.prototype.slice.call(forms).forEach(function (form) {
       form.addEventListener(
-        "submit",
+        'submit',
         function (event: {
           preventDefault: () => void;
           stopPropagation: () => void;
@@ -171,7 +172,7 @@ const Registration = () => {
             event.stopPropagation();
           }
 
-          form.classList.add("was-validated");
+          form.classList.add('was-validated');
         },
         false
       );
@@ -179,83 +180,81 @@ const Registration = () => {
   })();
 
   return (
-    <div className="row d-flex  align-items-center vh-100 bg-body-secondary text-center">
-      <form className="col-6  was-validated  needs-validation novalidate">
-        <div className="mb-3 row justify-content-end">
+    <div className='row d-flex  align-items-center vh-100 bg-body-secondary text-center'>
+      <form className='col-6  was-validated  needs-validation novalidate'>
+        <div className='mb-3 row justify-content-end'>
           <label
-            htmlFor="inputName"
-            className="col-sm-3 col-form-label text-end "
+            htmlFor='inputName'
+            className='col-sm-3 col-form-label text-end '
           >
             Name
           </label>
-          <div className="col-sm-6">
+          <div className='col-sm-6'>
             <input
               required
-              type="text"
-              className="form-control "
-              id="inputName"
-              aria-describedby="nameHelp"
+              type='text'
+              className='form-control '
+              id='inputName'
+              aria-describedby='nameHelp'
               value={valueName}
               onChange={(eventName) => printName(eventName)}
             />
           </div>
         </div>
 
-        <div className="mb-3 row justify-content-end">
+        <div className='mb-3 row justify-content-end'>
           <label
-            htmlFor="inputEmail"
-            className="col-sm-3 col-form-label text-end"
+            htmlFor='inputEmail'
+            className='col-sm-3 col-form-label text-end'
           >
             Email address
           </label>
-          <div className="col-sm-6">
+          <div className='col-sm-6'>
             <input
               required
-              type="email"
-              className="form-control"
-              id="inputEmail"
-              aria-describedby="emailHelp"
+              type='email'
+              className='form-control'
+              id='inputEmail'
+              aria-describedby='emailHelp'
               value={valueMail}
               onChange={(eventMail) => printEmail(eventMail)}
             />
           </div>
-          <div className="invalid-feedback">
-            Invalid email address
-          </div>
+          <div className='invalid-feedback'>Invalid email address</div>
         </div>
 
-        <div className="mb-3 row justify-content-end">
+        <div className='mb-3 row justify-content-end'>
           <label
-            htmlFor="inputPassword"
-            className="col-sm-3 col-form-label text-end"
+            htmlFor='inputPassword'
+            className='col-sm-3 col-form-label text-end'
           >
             Password
           </label>
-          <div className="col-sm-6">
+          <div className='col-sm-6'>
             <input
               required
-              type="password"
-              className="form-control"
-              id="inputPassword"
+              type='password'
+              className='form-control'
+              id='inputPassword'
               value={valuePass}
               onChange={(eventPass) => printPass(eventPass)}
             />
           </div>
         </div>
 
-        <div className="mb-3 row justify-content-end">
+        <div className='mb-3 row justify-content-end'>
           <label
-            htmlFor="inputConfirmPassword"
-            className="col-sm-3 col-form-label text-end"
+            htmlFor='inputConfirmPassword'
+            className='col-sm-3 col-form-label text-end'
           >
             Confirm Password
           </label>
-          <div className="col-sm-6">
+          <div className='col-sm-6'>
             <input
               required
-              type="password"
-              className="form-control"
-              id="inputConfirmPassword"
+              type='password'
+              className='form-control'
+              id='inputConfirmPassword'
               value={valueConfirmPass}
               onChange={(eventConfirmPass) =>
                 printConfirmPass(eventConfirmPass)
@@ -264,11 +263,11 @@ const Registration = () => {
           </div>
         </div>
 
-        <div className="row justify-content-end">
-          <div className="col-sm-9 offset-sm-3 d-flex justify-content-end">
+        <div className='row justify-content-end'>
+          <div className='col-sm-9 offset-sm-3 d-flex justify-content-end'>
             <button
-              type="submit"
-              className="btn btn-primary"
+              type='submit'
+              className='btn btn-primary'
               onClick={(event) => handleOnClick(event)}
             >
               Add user
@@ -277,32 +276,32 @@ const Registration = () => {
         </div>
       </form>
 
-      <table className="table table-hover">
+      <table className='table table-hover'>
         <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Password</th>
-            <th scope="col">Actions</th>
+            <th scope='col'>#</th>
+            <th scope='col'>Name</th>
+            <th scope='col'>Email</th>
+            <th scope='col'>Password</th>
+            <th scope='col'>Actions</th>
           </tr>
         </thead>
         <tbody>
           {users.map((user) => (
             <tr key={user.id}>
-              <th scope="row">{user.id}</th>
+              <th scope='row'>{user.id}</th>
               <td>{user.name}</td>
               <td>{user.email}</td>
               <td>{user.password}</td>
               <td>
                 <button
-                  className="btn btn-primary btn-sm me-1"
+                  className='btn btn-primary btn-sm me-1'
                   onClick={() => showEdit(user)}
                 >
                   Edit
                 </button>
                 <button
-                  className="btn btn-danger btn-sm"
+                  className='btn btn-danger btn-sm'
                   onClick={() => {
                     deleteOnClick(user.id);
                   }}
@@ -321,38 +320,38 @@ const Registration = () => {
         </Modal.Header>
         <Modal.Body>
           <form>
-            <div className="mb-3">
-              <label htmlFor="editName" className="form-label">
+            <div className='mb-3'>
+              <label htmlFor='editName' className='form-label'>
                 Name
               </label>
               <input
-                type="text"
-                className="form-control"
-                id="editName"
+                type='text'
+                className='form-control'
+                id='editName'
                 value={currentUser?.name}
                 onChange={(eventName) => changeCurrentName(eventName)}
               />
             </div>
-            <div className="mb-3">
-              <label htmlFor="editEmail" className="form-label">
+            <div className='mb-3'>
+              <label htmlFor='editEmail' className='form-label'>
                 Email
               </label>
               <input
-                type="email"
-                className="form-control"
-                id="editEmail"
+                type='email'
+                className='form-control'
+                id='editEmail'
                 value={currentUser?.email}
                 onChange={(eventMail) => changeCurrentEmail(eventMail)}
               />
             </div>
-            <div className="mb-3">
-              <label htmlFor="editPassword" className="form-label">
+            <div className='mb-3'>
+              <label htmlFor='editPassword' className='form-label'>
                 Password
               </label>
               <input
-                type="password"
-                className="form-control"
-                id="editPassword"
+                type='password'
+                className='form-control'
+                id='editPassword'
                 value={currentUser?.password}
                 onChange={(eventPass) => changeCurrentPassword(eventPass)}
               />
@@ -360,10 +359,10 @@ const Registration = () => {
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
+          <Button variant='secondary' onClick={handleCloseModal}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleEditUser}>
+          <Button variant='primary' onClick={handleEditUser}>
             Save Changes
           </Button>
         </Modal.Footer>
