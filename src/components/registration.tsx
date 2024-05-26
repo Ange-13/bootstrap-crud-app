@@ -7,8 +7,8 @@ interface User {
   name: string;
   email: string;
   password: string;
+  confirmPassword: '';
 }
-// Test comment
 
 const Registration = () => {
   const [valueName, setValueName] = useState('');
@@ -20,6 +20,8 @@ const Registration = () => {
   const [valuePrintPass, setValuePrintPass] = useState('');
   const [valueMail, setValueMail] = useState('');
   const [valuePrintEmail, setValuePrintEmail] = useState('');
+  const [valueConfirmPass, setValueConfirmPass] = useState('');
+  const [valuePrintConfirmPass, setValuePrintConfirmPass] = useState('');
 
   useEffect(() => {
     fetchUsers().then();
@@ -32,19 +34,29 @@ const Registration = () => {
   }
 
   function handleOnClick(event: any) {
+    const hasLetters = /[a-zA-Z]/.test(valuePass);
+    const hasNumbers = /[0-9]/.test(valuePass);
+
     event.preventDefault(event);
-    if (valueName.length <= 8){
-      alert("Username must contain more than 8 characters")
+    if (valueName.length <= 8) {
+      alert('Username must contain more than 8 characters');
       return;
     }
-    if (valuePass.length <= 4){
-      alert("Password must be longer than 4 characters")
+    if (valuePass.length <= 4) {
+      alert('Password must be longer than 4 characters');
       return;
     }
-    if (valuePass != valueConfirmPass){
-      alert("Passwords do not match !")
-      return
+
+    if (!hasLetters || !hasNumbers) {
+      alert('Password must contain both letters and numbers');
+      return;
     }
+
+    if (valuePass != valueConfirmPass) {
+      alert('Passwords do not match !');
+      return;
+    }
+
     fetch('http://localhost:8081/users', {
       method: 'POST',
       headers: {
@@ -57,9 +69,9 @@ const Registration = () => {
         password: valuePass,
       }),
     }).then((response) => {
-      if (!response.ok){
-        response.json().then(err => alert(err.error))
-        return
+      if (!response.ok) {
+        response.json().then((err) => alert(err.error));
+        return;
       }
       setValuePrintName(valueName);
       setValuePrintEmail(valueMail);
@@ -103,16 +115,16 @@ const Registration = () => {
   }
 
   function handleEditUser() {
-    if (currentUser == undefined){
-      alert("Current User doesn't exist")
+    if (currentUser == undefined) {
+      alert("Current User doesn't exist");
       return;
     }
-    if (currentUser.name.length <= 8){
-      alert("Username must contain more than 8 characters")
+    if (currentUser.name.length <= 8) {
+      alert('Username must contain more than 8 characters');
       return;
     }
-    if (currentUser.password.length <= 4){
-      alert("Password must be longer than 4 characters")
+    if (currentUser.password.length <= 4) {
+      alert('Password must be longer than 4 characters');
       return;
     }
     fetch(`http://localhost:8081/users/${currentUser?.id}`, {
@@ -127,9 +139,9 @@ const Registration = () => {
         password: currentUser?.password,
       }),
     }).then((response) => {
-      if (!response.ok){
-        response.json().then(err => alert(err.error))
-        return
+      if (!response.ok) {
+        response.json().then((err) => alert(err.error));
+        return;
       }
       fetchUsers().then(() => setToggleModal(false));
     });
@@ -174,40 +186,11 @@ const Registration = () => {
     console.log(valuePass);
   }
 
-  const [valueConfirmPass, setValueConfirmPass] = useState('');
-  const [valuePrintConfirmPass, setValuePrintConfirmPass] = useState('');
-
   function printConfirmPass(eventConfirmPass: ChangeEvent<HTMLInputElement>) {
     setValueConfirmPass(eventConfirmPass.target.value);
     console.log('event1:', eventConfirmPass);
     console.log(eventConfirmPass);
   }
-
-  (function () {
-    'use strict';
-
-    let forms = document.querySelectorAll('.needs-validation');
-
-    // Ova ne znam kako da go upotrebam da raboti za mojata forma i dali voopsto e tocno, samo was-valdiated na formata staviv i toa samo posocuva koj input e popolnet koj ne e ama ne pazi sto stavas vo inputot
-
-    Array.prototype.slice.call(forms).forEach(function (form) {
-      form.addEventListener(
-        'submit',
-        function (event: {
-          preventDefault: () => void;
-          stopPropagation: () => void;
-        }) {
-          if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-
-          form.classList.add('was-validated');
-        },
-        false
-      );
-    });
-  })();
 
   return (
     <div className='row d-flex  align-items-center vh-100 bg-body-secondary text-center'>
@@ -384,6 +367,17 @@ const Registration = () => {
                 id='editPassword'
                 value={currentUser?.password}
                 onChange={(eventPass) => changeCurrentPassword(eventPass)}
+              />
+            </div>
+            <div className='mb-3'>
+              <label htmlFor='confirmPassword' className='form-label'>
+                Confirm Password
+              </label>
+              <input
+                type='password'
+                className='form-control'
+                id='confirmPassword'
+                value={currentUser?.confirmPassword}
               />
             </div>
           </form>
