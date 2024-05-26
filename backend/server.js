@@ -42,34 +42,40 @@ app.get('/users', (req, res) => {
   });
 });
 
-app.post('/users', (req, res) => {
-  const { name, email, password } = req.body;
+app.post('/users', async (req, res) => {
+  const {name, email, password} = req.body;
   const insertQuery =
-    'INSERT INTO users (name, email, password) VALUES ($1, $2, $3)';
+      'INSERT INTO users (name, email, password) VALUES ($1, $2, $3)';
   const queryParams = [name, email, password];
 
-  client.query(insertQuery, queryParams, (err, result) => {
-    if (err) {
-      res.status(500).send('Internal Server Error');
+  try {
+    const result = await client.query(insertQuery, queryParams)
+    res.status(201).send('{}');
+  } catch (err) {
+    if (err.code == 23505) {
+      res.status(400).send({error: `User with ${email} address already exists`});
     } else {
-      res.status(201).send('{}');
+      res.status(500).send('Internal Server Error');
     }
-  });
+  }
 });
 
-app.patch('/users/:id', (req, res) => {
+app.patch('/users/:id', async (req, res) => {
   const { name, email, password } = req.body;
   const updateQuery =
     'UPDATE users SET name = $1, email = $2, password = $3 WHERE id = $4';
   const queryParams = [name, email, password, req.params.id];
 
-  client.query(updateQuery, queryParams, (err, result) => {
-    if (err) {
-      console.error('Error executing query', err);
+    try {
+    const result = await client.query(updateQuery, queryParams)
+    res.status(201).send('{}');
+  } catch (err) {
+    if (err.code == 23505) {
+      res.status(400).send({error: `User with ${email} already exists`});
     } else {
-      res.send('Successfully updated data !');
+      res.status(500).send('Internal Server Error');
     }
-  });
+  }
 });
 
 app.delete('/users/:id', (req, res) => {

@@ -15,7 +15,11 @@ const Registration = () => {
   const [valuePrintName, setValuePrintName] = useState('');
   const [users, setUsers] = useState<User[]>([]);
   const [toggleModal, setToggleModal] = useState(false);
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [currentUser, setCurrentUser] = useState<User>();
+  const [valuePass, setValuePass] = useState('');
+  const [valuePrintPass, setValuePrintPass] = useState('');
+  const [valueMail, setValueMail] = useState('');
+  const [valuePrintEmail, setValuePrintEmail] = useState('');
 
   useEffect(() => {
     fetchUsers().then();
@@ -29,6 +33,18 @@ const Registration = () => {
 
   function handleOnClick(event: any) {
     event.preventDefault(event);
+    if (valueName.length <= 8){
+      alert("Username must contain more than 8 characters")
+      return;
+    }
+    if (valuePass.length <= 4){
+      alert("Password must be longer than 4 characters")
+      return;
+    }
+    if (valuePass != valueConfirmPass){
+      alert("Passwords do not match !")
+      return
+    }
     fetch('http://localhost:8081/users', {
       method: 'POST',
       headers: {
@@ -40,7 +56,11 @@ const Registration = () => {
         email: valueMail,
         password: valuePass,
       }),
-    }).then(() => {
+    }).then((response) => {
+      if (!response.ok){
+        response.json().then(err => alert(err.error))
+        return
+      }
       setValuePrintName(valueName);
       setValuePrintEmail(valueMail);
       setValuePrintPass(valuePass);
@@ -78,11 +98,23 @@ const Registration = () => {
   }
 
   function handleCloseModal() {
-    setCurrentUser(null);
+    setCurrentUser(undefined);
     setToggleModal(false);
   }
 
   function handleEditUser() {
+    if (currentUser == undefined){
+      alert("Current User doesn't exist")
+      return;
+    }
+    if (currentUser.name.length <= 8){
+      alert("Username must contain more than 8 characters")
+      return;
+    }
+    if (currentUser.password.length <= 4){
+      alert("Password must be longer than 4 characters")
+      return;
+    }
     fetch(`http://localhost:8081/users/${currentUser?.id}`, {
       method: 'PATCH',
       headers: {
@@ -94,13 +126,14 @@ const Registration = () => {
         email: currentUser?.email,
         password: currentUser?.password,
       }),
-    }).then(() => {
+    }).then((response) => {
+      if (!response.ok){
+        response.json().then(err => alert(err.error))
+        return
+      }
       fetchUsers().then(() => setToggleModal(false));
     });
   }
-
-  const [valueMail, setValueMail] = useState('');
-  const [valuePrintEmail, setValuePrintEmail] = useState('');
 
   function printEmail(eventMail: ChangeEvent<HTMLInputElement>) {
     setValueMail(eventMail.target.value);
@@ -134,9 +167,6 @@ const Registration = () => {
       console.log('Updated user:', updatedUser);
     }
   }
-
-  const [valuePass, setValuePass] = useState('');
-  const [valuePrintPass, setValuePrintPass] = useState('');
 
   function printPass(eventPass: ChangeEvent<HTMLInputElement>) {
     setValuePass(eventPass.target.value);
