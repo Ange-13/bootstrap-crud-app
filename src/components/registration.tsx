@@ -43,7 +43,7 @@ const Registration = () => {
       return;
     }
     if (valuePass.length <= 4) {
-      alert('Password must be longer than 4 characters');
+      alert('Your password must contain more than 8 characters!');
       return;
     }
 
@@ -53,7 +53,7 @@ const Registration = () => {
     }
 
     if (valuePass != valueConfirmPass) {
-      alert('Passwords do not match !');
+      alert('Passwords do not match ! Please confirm your password.');
       return;
     }
 
