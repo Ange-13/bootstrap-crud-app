@@ -19,7 +19,7 @@ const Registration = () => {
   const [valuePass, setValuePass] = useState('');
   const [valuePrintPass, setValuePrintPass] = useState('');
   const [valueMail, setValueMail] = useState('');
-  const [valuePrintEmail, setValuePrintEmail] = useState('');
+  const [valuePrintMail, setValuePrintMail] = useState('');
   const [valueConfirmPass, setValueConfirmPass] = useState('');
   const [valuePrintConfirmPass, setValuePrintConfirmPass] = useState('');
 
@@ -74,7 +74,7 @@ const Registration = () => {
         return;
       }
       setValuePrintName(valueName);
-      setValuePrintEmail(valueMail);
+      setValuePrintMail(valueMail);
       setValuePrintPass(valuePass);
       setValuePrintConfirmPass(valueConfirmPass);
 
