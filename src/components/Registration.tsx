@@ -13,7 +13,7 @@ interface User {
 }
 
 const Registration = () => {
-  const {t,} = useTranslation();
+  const { t } = useTranslation();
   const [valueName, setValueName] = useState("");
   const [valuePrintName, setValuePrintName] = useState("");
   const [users, setUsers] = useState<User[]>([]);
@@ -25,7 +25,6 @@ const Registration = () => {
   const [valuePrintMail, setValuePrintMail] = useState("");
   const [valueConfirmPass, setValueConfirmPass] = useState("");
   const [valuePrintConfirmPass, setValuePrintConfirmPass] = useState("");
-  
 
   useEffect(() => {
     fetchUsers().then();
@@ -199,18 +198,16 @@ const Registration = () => {
   return (
     <div className="row d-flex  align-items-center vh-100 bg-body-secondary text-center">
       <div className="col-12">
-      <LanguageSwitcher/>
+        <LanguageSwitcher />
       </div>
-       
+
       <form className="col-6  was-validated  needs-validation novalidate">
-      
-     
         <div className="mb-3 row justify-content-end">
           <label
             htmlFor="inputName"
             className="col-sm-3 col-form-label text-end "
           >
-          {t("Name")}
+            {t("Name")}
           </label>
           <div className="col-sm-6">
             <input
@@ -230,7 +227,7 @@ const Registration = () => {
             htmlFor="inputEmail"
             className="col-sm-3 col-form-label text-end"
           >
-           {t("Email")}
+            {t("Email")}
           </label>
           <div className="col-sm-6">
             <input
@@ -345,7 +342,7 @@ const Registration = () => {
           <form>
             <div className="mb-3">
               <label htmlFor="editName" className="form-label">
-              {t("Name")}
+                {t("Name")}
               </label>
               <input
                 type="text"
@@ -357,7 +354,7 @@ const Registration = () => {
             </div>
             <div className="mb-3">
               <label htmlFor="editEmail" className="form-label">
-              {t("Email")}
+                {t("Email")}
               </label>
               <input
                 type="email"
@@ -381,7 +378,7 @@ const Registration = () => {
             </div>
             <div className="mb-3">
               <label htmlFor="editConfirmPassword" className="form-label">
-              {t("confirmPassword")}
+                {t("confirmPassword")}
               </label>
               <input
                 type="password"
@@ -397,7 +394,7 @@ const Registration = () => {
             {t("Close")}
           </Button>
           <Button variant="primary" onClick={handleEditUser}>
-           {t("saveChanges")}
+            {t("saveChanges")}
           </Button>
         </Modal.Footer>
       </Modal>
