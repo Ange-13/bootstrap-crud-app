@@ -198,8 +198,12 @@ const Registration = () => {
 
   return (
     <div className="row d-flex  align-items-center vh-100 bg-body-secondary text-center">
-       <LanguageSwitcher/>
+      <div className="col-12">
+      <LanguageSwitcher/>
+      </div>
+       
       <form className="col-6  was-validated  needs-validation novalidate">
+      
      
         <div className="mb-3 row justify-content-end">
           <label
