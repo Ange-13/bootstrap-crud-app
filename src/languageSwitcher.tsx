@@ -7,7 +7,7 @@ const LanguageSwitcher = () => {
     <header style={{float: "right", margin: "2px"}}>
         <button style={{border: "none", cursor: "pointer", background: "none"}} onClick={() => i18n.changeLanguage("en")}>
           <span>
-            <img src="https://flagcdn.com/24x18/us.png" alt="EN" />
+            <img src="https://flagcdn.com/24x18/us.png" alt="English" />
           </span>
         </button>
         <button style={{border: "none", cursor: "pointer", background: "none"}} onClick={() => i18n.changeLanguage("mk")}>

@@ -1,6 +1,13 @@
 {
-  "Email": "Еmail",
-  "Password": "Passwort",
-  "Cancel": "Absagen",
-  "confirmPassword": "Passwort bestätigen"
+  "Name": "Име",
+  "Email": "Е-пошта",
+  "Password": "Лозинка",
+  "Close": "Затвори",
+  "Options": "Опции",
+  "Edit": "Уреди",
+  "Delete": "Избриши",
+  "confirmPassword": "Потврди лозинка",
+  "addUser": "Додади корисник",
+  "saveChanges":"Зачувај промени",
+  "editUser":"Уреди корисник"
 }

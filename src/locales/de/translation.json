@@ -1,6 +1,13 @@
 {
+  "Name": "Name",
   "Email": "Еmail",
   "Password": "Passwort",
-  "Cancel": "Absagen",
-  "confirmPassword": "Passwort bestätigen"
+  "Close": "Schliessen",
+  "Options": "Optionen",
+  "Edit": "Bearbeiten",
+  "Delete": "Löschen",
+  "confirmPassword": "Passwort bestätigen",
+  "addUser": "Benutzer hinzufügen",
+  "saveChanges":"Änderungen speichern",
+  "editUser":"Benutzer bearbeiten"
 }
