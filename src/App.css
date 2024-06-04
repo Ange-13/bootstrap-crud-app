@@ -1,1 +1,15 @@
+.custom-btn-sm {
+  width: 110px !important;
+}
 
+.custom-btn-md {
+  width: 180px;
+}
+
+.table-width-23 {
+  width: 23%;
+}
+
+.table-width-5{
+    width: 8%;
+}

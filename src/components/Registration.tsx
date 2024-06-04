@@ -196,12 +196,12 @@ const Registration = () => {
   }
 
   return (
-    <div className="row d-flex  align-items-center vh-100 bg-body-secondary text-center">
+    <div className="row  container-fluid d-flex  align-items-center vh-100 bg-body-secondary text-center p-0">
       <div className="col-12">
         <LanguageSwitcher />
       </div>
-
-      <form className="col-6  was-validated  needs-validation novalidate">
+      <h1 className="col-9 mb-0 text-muted">Registration Form </h1>
+      <form className="col-6 was-validated  needs-validation novalidate mt-0 p-0">
         <div className="mb-3 row justify-content-end">
           <label
             htmlFor="inputName"
@@ -287,7 +287,7 @@ const Registration = () => {
           <div className="col-sm-9 offset-sm-3 d-flex justify-content-end">
             <button
               type="submit"
-              className="btn btn-primary"
+              className="btn btn-primary custom-btn-md"
               onClick={(event) => handleOnClick(event)}
             >
               {t("addUser")}
@@ -298,7 +298,7 @@ const Registration = () => {
 
       <table className="table table-hover">
         <thead>
-          <tr>
+          <tr >
             <th scope="col">#</th>
             <th scope="col">{t("Name")}</th>
             <th scope="col"> {t("Email")}</th>
@@ -308,20 +308,20 @@ const Registration = () => {
         </thead>
         <tbody>
           {users.map((user) => (
-            <tr key={user.id}>
-              <th scope="row">{user.id}</th>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.password}</td>
-              <td>
+            <tr key={user.id} >
+              <th scope="row" className="table-width-5">{user.id}</th>
+              <td className="table-width-23">{user.name}</td>
+              <td className="table-width-23">{user.email}</td>
+              <td className="table-width-23">{user.password}</td>
+              <td className="table-width-23">
                 <button
-                  className="btn btn-primary btn-sm me-1"
+                  className="btn btn-primary me-1 custom-btn-sm"
                   onClick={() => showEdit(user)}
                 >
                   {t("Edit")}
                 </button>
                 <button
-                  className="btn btn-danger btn-sm"
+                  className="btn btn-danger  custom-btn-sm"
                   onClick={() => {
                     deleteOnClick(user.id);
                   }}
