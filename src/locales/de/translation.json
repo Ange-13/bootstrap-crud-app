@@ -9,5 +9,6 @@
   "confirmPassword": "Passwort bestätigen",
   "addUser": "Benutzer hinzufügen",
   "saveChanges":"Änderungen speichern",
-  "editUser":"Benutzer bearbeiten"
+  "editUser":"Benutzer bearbeiten",
+  "registrationForm":"Anmeldeformular"
 }

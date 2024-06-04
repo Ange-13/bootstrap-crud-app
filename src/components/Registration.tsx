@@ -130,6 +130,11 @@ const Registration = () => {
       alert("Password must be longer than 4 characters");
       return;
     }
+    if (valuePass != valueConfirmPass) {
+      alert("Passwords do not match ! Please confirm your password.");
+      return;
+    }
+
     fetch(`http://localhost:8081/users/${currentUser?.id}`, {
       method: "PATCH",
       headers: {
@@ -183,6 +188,8 @@ const Registration = () => {
     }
   }
 
+ 
+
   function printPass(eventPass: ChangeEvent<HTMLInputElement>) {
     setValuePass(eventPass.target.value);
     console.log("event1:", eventPass);
@@ -200,8 +207,8 @@ const Registration = () => {
       <div className="col-12">
         <LanguageSwitcher />
       </div>
-      <h1 className="col-9 mb-0 text-muted">Registration Form </h1>
-      <form className="col-6 was-validated  needs-validation novalidate mt-0 p-0">
+      <h1 className="col-9 mb-0 text-muted">{t("registrationForm")} </h1>
+      <form className="col-6 was-validated  needs-validation novalidate">
         <div className="mb-3 row justify-content-end">
           <label
             htmlFor="inputName"
@@ -385,6 +392,7 @@ const Registration = () => {
                 className="form-control"
                 id="editConfirmPassword"
                 value={currentUser?.confirmPassword}
+                onChange={(eventConfirmPass) => changeCurrentPassword(eventConfirmPass)}
               />
             </div>
           </form>

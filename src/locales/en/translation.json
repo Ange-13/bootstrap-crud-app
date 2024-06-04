@@ -9,5 +9,6 @@
   "confirmPassword": "Confirm Password",
   "addUser": "Add User",
   "saveChanges": "Save Changes",
-  "editUser":"Edit User"
+  "editUser":"Edit User",
+  "registrationForm":"Registration Form"
 }

@@ -9,5 +9,6 @@
   "confirmPassword": "Потврди лозинка",
   "addUser": "Додади корисник",
   "saveChanges":"Зачувај промени",
-  "editUser":"Уреди корисник"
+  "editUser":"Уреди корисник",
+  "registrationForm":"Форма за регистрација"
 }
