@@ -203,7 +203,8 @@ const Registration = () => {
   }
 
   return (
-    <div className="row  container-fluid d-flex  align-items-center vh-100 bg-body-secondary text-center p-0">
+    <div className="container-fluid">
+    <div className="row   d-flex  align-items-center vh-100 bg-body-secondary text-center">
       <div className="col-12">
         <LanguageSwitcher />
       </div>
@@ -276,7 +277,7 @@ const Registration = () => {
           >
             {t("confirmPassword")}
           </label>
-          <div className="col-sm-6">
+          <div className="col-sm-6 mb-4">
             <input
               required
               type="password"
@@ -303,7 +304,7 @@ const Registration = () => {
         </div>
       </form>
 
-      <table className="table table-hover">
+      <table className="table table-hover container-fluid">
         <thead>
           <tr >
             <th scope="col">#</th>
@@ -406,6 +407,7 @@ const Registration = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+    </div>
     </div>
   );
 };
