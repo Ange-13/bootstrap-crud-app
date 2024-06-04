@@ -9,7 +9,7 @@ interface User {
   name: string;
   email: string;
   password: string;
-  confirmPassword: '';
+  confirmPassword: string;
 }
 
 const Registration = () => {
@@ -122,6 +122,10 @@ const Registration = () => {
       alert("Current User doesn't exist");
       return;
     }
+
+    const hasLetters = /[a-zA-Z]/.test(currentUser.password);
+    const hasNumbers = /[0-9]/.test(currentUser.password);
+
     if (currentUser.name.length <= 8) {
       alert('Username must contain more than 8 characters');
       return;
@@ -130,7 +134,13 @@ const Registration = () => {
       alert('Password must be longer than 4 characters');
       return;
     }
-    if (valuePass != valueConfirmPass) {
+
+    if (!hasLetters || !hasNumbers) {
+      alert('Password must contain both letters and numbers');
+      return;
+    }
+
+    if (currentUser.password != currentUser.confirmPassword) {
       alert('Passwords do not match ! Please confirm your password.');
       return;
     }
@@ -183,6 +193,17 @@ const Registration = () => {
     if (currentUser) {
       let updatedUser = { ...currentUser };
       updatedUser.password = eventName.target.value;
+      setCurrentUser(updatedUser);
+      console.log('Updated user:', updatedUser);
+    }
+  }
+
+  function changeCurrentConfirmPassword(
+    eventName: ChangeEvent<HTMLInputElement>
+  ) {
+    if (currentUser) {
+      let updatedUser = { ...currentUser };
+      updatedUser.confirmPassword = eventName.target.value;
       setCurrentUser(updatedUser);
       console.log('Updated user:', updatedUser);
     }
@@ -393,8 +414,8 @@ const Registration = () => {
                   className='form-control'
                   id='editConfirmPassword'
                   value={currentUser?.confirmPassword}
-                  onChange={(eventConfirmPass) =>
-                    changeCurrentPassword(eventConfirmPass)
+                  onChange={(eventConfirmPassword) =>
+                    changeCurrentConfirmPassword(eventConfirmPassword)
                   }
                 />
               </div>
