@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from '../languageSwitcher';
+import PublicIcon from '@mui/icons-material/Public';
 
 interface User {
   id: number;

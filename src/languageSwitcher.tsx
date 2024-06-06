@@ -1,27 +1,49 @@
-import { useTranslation } from "react-i18next";
+import React, { useState } from 'react';
+import i18n from 'i18next';
+import PublicIcon from '@mui/icons-material/Public';
 
-const LanguageSwitcher = () => {
-  const { i18n } = useTranslation();
+
+const LanguageDropdown = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const changeLanguage = (lang: string | undefined) => {
+    i18n.changeLanguage(lang);
+    setIsOpen(false);
+  };
 
   return (
-    <header style={{float: "right", margin: "2px"}}>
-        <button style={{border: "none", cursor: "pointer", background: "none"}} onClick={() => i18n.changeLanguage("en")}>
-          <span>
-            <img src="https://flagcdn.com/24x18/us.png" alt="English" />
-          </span>
-        </button>
-        <button style={{border: "none", cursor: "pointer", background: "none"}} onClick={() => i18n.changeLanguage("mk")}>
-          <span>
-            <img src="https://flagcdn.com/24x18/mk.png" alt="MK" />
-          </span>
-        </button>
-          <button style={{border: "none", cursor: "pointer", background: "none"}} onClick={() => i18n.changeLanguage("de")}>
-          <span>
-            <img src="https://flagcdn.com/24x18/de.png" alt="DE" />
-          </span>
-        </button>
-      </header>
+    <div style={{ position: 'relative', float: 'right', margin: '2px', width:'40px'}}>
+     
+       <PublicIcon onClick={toggleDropdown} style={{fontSize:'40px'}}></PublicIcon>
+    
+      {isOpen && (
+        <div style={{ position: 'absolute', right: 0, backgroundColor: 'none', border: 'none', zIndex: 1,display:'flex', flexWrap:'wrap'}}>
+          <button style={{ border: 'none', cursor: 'pointer', background: 'none', display: 'block' }} onClick={() => changeLanguage('en')}>
+            <span >
+              <img src="https://flagcdn.com/24x18/us.png" alt="English" style={{marginRight:'5px'}}/>
+             
+            </span>
+          </button>
+          <button style={{ border: 'none', cursor: 'pointer', background: 'none', display: 'block', marginRight:'3px'}} onClick={() => changeLanguage('mk')}>
+            <span>
+              <img src="https://flagcdn.com/24x18/mk.png" alt="MK" style={{marginRight:'5px'}} />
+              
+            </span>
+          </button>
+          <button style={{ border: 'none', cursor: 'pointer', background: 'none', display: 'block' }} onClick={() => changeLanguage('de')}>
+            <span>
+              <img src="https://flagcdn.com/24x18/de.png" alt="DE" style={{marginRight:'5px'}} />
+             
+            </span>
+          </button>
+        </div>
+      )}
+    </div>
   );
 };
 
-export default LanguageSwitcher;
+export default LanguageDropdown;
